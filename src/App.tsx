@@ -1,18 +1,14 @@
-import { useState } from "react";
-
-import { Button } from "@/components/ui/button";
 import { PageContainer } from "@/components/shared/page-container";
+import { VeggieList } from "@/components/shared/veggie-list";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <PageContainer>
-      <h1 className="text-3xl font-bold underline">Seasonal Veggies</h1>
+      <div className="my-4">
+        <h1 className="text-3xl font-bold underline">Seasonal Veggies</h1>
+      </div>
 
-      <Button className="mt-2" onClick={() => setCount((count) => count + 1)}>
-        Count is {count}
-      </Button>
+      <VeggieList />
     </PageContainer>
   );
 }

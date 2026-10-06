@@ -13,7 +13,7 @@ import { getMonthLabel, capitalize } from "../../helpers.ts";
 
 const LABELS = {
   yearRound: "Todo el año",
-  crop: "Cultivo",
+  crop: "Cultivo desconocido",
 };
 
 type CropName = keyof typeof CROPS_LABELS;

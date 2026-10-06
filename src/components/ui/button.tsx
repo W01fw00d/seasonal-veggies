@@ -54,4 +54,5 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+// oxlint-disable-next-line react/only-export-components
+export { Button, buttonVariants };

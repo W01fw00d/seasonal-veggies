@@ -7,15 +7,15 @@ import { getAllCrops } from "./services/cropService.ts";
 
 import type { Crop } from "./types.ts";
 
+const LABELS = {
+  loading: "Cargando",
+  loadingError: "No se pudo cargar la lista.",
+};
+
 function App() {
   const [crops, setCrops] = useState<Crop[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const labels = {
-    loading: "Cargando",
-    loadingError: "No se pudo cargar la lista.",
-  };
 
   // TODO: test all promise status and results
   useEffect(() => {
@@ -26,7 +26,7 @@ function App() {
         if (!cancelled) setCrops(data);
       })
       .catch(() => {
-        if (!cancelled) setError(labels.loadingError);
+        if (!cancelled) setError(LABELS.loadingError);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -37,7 +37,7 @@ function App() {
     };
   }, []);
 
-  if (loading) return <p>{labels.loading}...</p>;
+  if (loading) return <p>{LABELS.loading}...</p>;
   if (error) return <p>{error}</p>;
 
   return (

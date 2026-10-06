@@ -1,4 +1,4 @@
-export const CROPS_LABELS = {
+const VEGETABLE_LABELS = {
   chard: "acelga",
   garlic: "ajo",
   artichoke: "alcachofa",
@@ -28,4 +28,40 @@ export const CROPS_LABELS = {
   cabbage: "repollo",
   tomato: "tomate",
   carrot: "zanahoria",
+};
+
+const FRUIT_LABELS = {
+  avocado: "aguacate",
+  apricot: "albaricoque",
+  breva: "breva",
+  persimmon: "caqui",
+  cherry: "cereza",
+  cherimoya: "chirimoya",
+  plum: "ciruela",
+  raspberry: "frambuesa",
+  strawberry: "fresa",
+  pomegranate: "granada",
+  fig: "higo",
+  kiwi: "kiwi",
+  lemon: "limón",
+  mandarin: "mandarina",
+  mango: "mango",
+  apple: "manzana",
+  peach: "melocotón",
+  melon: "melón",
+  quince: "membrillo",
+  orange: "naranja",
+  nectarine: "nectarina",
+  loquat: "níspero",
+  flatPeach: "paraguaya",
+  pear: "pera",
+  banana: "plátano",
+  grapefruit: "pomelo",
+  watermelon: "sandía",
+  grape: "uva",
+};
+
+export const CROPS_LABELS = {
+  ...VEGETABLE_LABELS,
+  ...FRUIT_LABELS,
 };

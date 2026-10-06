@@ -9,10 +9,7 @@ import {
 import type { Crop } from "../../types";
 
 // TODO: component test
-
 export function CropList({ crops }: { crops: Crop[] }) {
-  // TODO: fix horizontal margin in mobile screens
-
   return (
     <div className="flex w-full max-w-md flex-col gap-6">
       <ItemGroup className="gap-4">

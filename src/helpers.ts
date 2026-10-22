@@ -1,6 +1,6 @@
 import type { Month } from "./types.ts";
 
-// TODO: unit test
+// TODO: unit test this file
 export const getMonthLabel = (month: Month, locale = "es-ES") =>
   new Intl.DateTimeFormat(locale, { month: "long" }).format(
     new Date(2000, month, 1),

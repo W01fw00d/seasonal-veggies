@@ -12,13 +12,12 @@ const LABELS = {
   loadingError: "No se pudo cargar la lista.",
 };
 
-// TODO: e2e test
 function App() {
   const [crops, setCrops] = useState<Crop[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // TODO: test all promise status and results
+  // TODO: e2e test; test all promise status and results
   useEffect(() => {
     let cancelled = false;
 

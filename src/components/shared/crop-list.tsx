@@ -18,7 +18,6 @@ const LABELS = {
 
 type CropName = keyof typeof CROPS_LABELS;
 
-// TODO: component test
 export function CropList({ crops }: { crops: Crop[] }) {
   return (
     <div className="flex w-full max-w-md flex-col gap-6 mb-4">

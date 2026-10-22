@@ -12,6 +12,7 @@ const LABELS = {
   loadingError: "No se pudo cargar la lista.",
 };
 
+// TODO: e2e test
 function App() {
   const [crops, setCrops] = useState<Crop[]>([]);
   const [loading, setLoading] = useState(true);

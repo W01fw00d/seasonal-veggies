@@ -1,0 +1,46 @@
+import { expect, test } from "@playwright/experimental-ct-react";
+
+import { CropList } from "../../src/components/shared/crop-list";
+import type { Crop } from "../../src/types";
+
+test("renders crop labels and their seasons", async ({ mount }) => {
+  const crops: Crop[] = [
+    {
+      name: "garlic",
+      category: "vegetable",
+      seasonFrom: 0,
+      seasonTo: 11,
+      yearRound: true,
+    },
+    {
+      name: "chard",
+      category: "vegetable",
+      seasonFrom: 7,
+      seasonTo: 4,
+      yearRound: false,
+    },
+    {
+      name: "unknown",
+      category: "vegetable",
+      seasonFrom: 0,
+      seasonTo: 0,
+      yearRound: false,
+    },
+  ];
+
+  const component = await mount(<CropList crops={crops} />);
+  const items = component.getByRole("listitem");
+
+  await expect(items).toHaveCount(3);
+  await expect(items.filter({ hasText: "Ajo" })).toContainText("Todo el año");
+  await expect(items.filter({ hasText: "Acelga" })).toContainText(
+    "Agosto - Mayo",
+  );
+  await expect(items.filter({ hasText: "Cultivo desconocido" })).toHaveCount(1);
+});
+
+test("renders an empty list when there are no crops", async ({ mount }) => {
+  const component = await mount(<CropList crops={[]} />);
+
+  await expect(component.getByRole("listitem")).toHaveCount(0);
+});

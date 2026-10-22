@@ -18,7 +18,7 @@ const LABELS = {
 
 type CropName = keyof typeof CROPS_LABELS;
 
-// TODO: component test
+// TODO: add a "No se han encontrado resultados" message when crops is an empty array and test it
 export function CropList({ crops }: { crops: Crop[] }) {
   return (
     <div className="flex w-full max-w-md flex-col gap-6 mb-4">

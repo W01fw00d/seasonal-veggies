@@ -12,13 +12,11 @@ const LABELS = {
   loadingError: "No se pudo cargar la lista.",
 };
 
-// TODO: e2e test
 function App() {
   const [crops, setCrops] = useState<Crop[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // TODO: test all promise status and results
   useEffect(() => {
     let cancelled = false;
 
@@ -38,6 +36,7 @@ function App() {
     };
   }, []);
 
+  // TODO: display loading and error labels instead of CropList, maintaining always the page layout and the Season Veggies title
   if (loading) return <p>{LABELS.loading}...</p>;
   if (error) return <p>{error}</p>;
 

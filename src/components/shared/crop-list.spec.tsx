@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-import type { Crop } from "../../src/types";
-import type { Default } from "../../src/components/shared/crop-list.story";
+import type { Crop } from "../../types";
+import type { Default } from "./crop-list.story";
 
 test("renders crop labels and their seasons", async ({ mount }) => {
   const crops: Crop[] = [

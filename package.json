@@ -8,8 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "test": "npm run test:unit && npm run test:components && npm run test:e2e",
+    "test:unit": "vitest run src --exclude \"**/*.spec.tsx\"",
     "test:components": "playwright test --project=components",
-    "test:components:ui": "playwright test --project=components --ui"
+    "test:components:ui": "playwright test --project=components --ui",
+    "test:e2e": "playwright test --project=e2e",
+    "test:e2e:ui": "playwright test --project=e2e --ui"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -32,6 +36,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "vite": "^8.3.0",
+    "vitest": "^4.0.0"
   }
 }

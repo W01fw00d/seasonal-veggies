@@ -2,13 +2,23 @@ import { defineConfig, devices } from "@playwright/test";
 import process from "node:process";
 
 export default defineConfig({
-  testDir: "./tests/components",
+  testDir: "./src",
   projects: [
     {
       name: "components",
+      testMatch: "**/components/**/*.spec.tsx",
       use: {
         ...devices["Desktop Chrome"],
         baseURL: "http://localhost:5173/playwright/gallery/index.html",
+        serviceWorkers: "block",
+      },
+    },
+    {
+      name: "e2e",
+      testMatch: "**/app.e2e.spec.tsx",
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: "http://localhost:5173",
         serviceWorkers: "block",
       },
     },

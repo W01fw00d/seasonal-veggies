@@ -2,7 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 import process from "node:process";
 
 export default defineConfig({
-  testDir: "./tests/components",
+  testDir: "./src",
+  testMatch: "**/*.spec.tsx",
   projects: [
     {
       name: "components",

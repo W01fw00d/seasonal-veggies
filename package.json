@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test:unit": "vitest run src --exclude \"**/*.spec.tsx\"",
     "test:components": "playwright test --project=components",
-    "test:components:ui": "playwright test --project=components --ui"
+    "test:components:ui": "playwright test --project=components --ui",
+    "test:e2e": "playwright test --project=e2e",
+    "test:e2e:ui": "playwright test --project=e2e --ui"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

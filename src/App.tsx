@@ -17,7 +17,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // TODO: e2e test; test all promise status and results
   useEffect(() => {
     let cancelled = false;
 

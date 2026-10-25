@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "test": "npm run test:unit && npm run test:components && npm run test:e2e",
     "test:unit": "vitest run src --exclude \"**/*.spec.tsx\"",
     "test:components": "playwright test --project=components",
     "test:components:ui": "playwright test --project=components --ui",

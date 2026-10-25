@@ -3,6 +3,7 @@ import process from "node:process";
 
 export default defineConfig({
   testDir: "./src",
+  reporter: [["list"], ["./playwright/coverage-reporter.mjs"]],
   projects: [
     {
       name: "components",

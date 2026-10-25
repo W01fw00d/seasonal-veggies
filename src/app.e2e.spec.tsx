@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../playwright/coverage-fixtures";
 
 async function mockCropService(
   page: import("@playwright/test").Page,

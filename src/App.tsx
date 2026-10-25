@@ -36,6 +36,7 @@ function App() {
     };
   }, []);
 
+  // TODO: display loading and error labels instead of CropList, maintaining always the page layout and the Season Veggies title
   if (loading) return <p>{LABELS.loading}...</p>;
   if (error) return <p>{error}</p>;
 

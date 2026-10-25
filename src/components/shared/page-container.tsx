@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 
-// TODO: add component test
 export function PageContainer({
   className,
   ...props

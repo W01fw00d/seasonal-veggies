@@ -1,6 +1,6 @@
-import type { Crop } from "../types.ts";
+import type { CropDto } from "./crop.dto";
 
-export const crops: Crop[] = [
+export const crops: CropDto[] = [
   // Data for Spain region
   // Source: Ministerio de Agricultura de España
 

@@ -5,7 +5,7 @@ Seasonal Veggies is an npm-workspaces monorepo with independently runnable and d
 ## Projects
 
 - `apps/seasonal-veggies-fe` — React, Vite, and the existing component gallery and tests.
-- `apps/seasonal-veggies-be` — NestJS API starter with a health endpoint at `/api/health`.
+- `apps/seasonal-veggies-be` — NestJS API with crop and health endpoints.
 
 ## Install and run
 
@@ -15,7 +15,7 @@ Install dependencies from the repository root:
 npm install
 ```
 
-Run each app in a separate terminal:
+Run each app in a separate terminal. The Vite development server proxies API requests to the backend:
 
 ```sh
 npm run dev:fe
@@ -50,10 +50,16 @@ docker build -f apps/seasonal-veggies-be/Dockerfile -t seasonal-veggies-be .
 docker run --rm -p 3000:3000 seasonal-veggies-be
 ```
 
-The backend health endpoint is available at `http://localhost:3000/api/health`. The frontend still uses its existing local crop data; connecting it to the API can be done separately without coupling the two deployment artifacts.
+The backend endpoints are available at `http://localhost:3000/api/health` and `http://localhost:3000/api/crops`. Interactive API documentation is available at `http://localhost:3000/api/docs` (OpenAPI JSON: `/api/docs-json`). Crop data is currently served from an in-memory static dataset; no database is used.
+
+The frontend requests `/api/crops` by default, and the Vite development server proxies it to `localhost:3000`. For separately hosted production apps, set `VITE_API_BASE_URL` to the backend origin when building the frontend and set `CORS_ORIGIN` on the backend to the frontend origin (or a comma-separated list of allowed origins).
 
 ## Frontend tests and coverage
 
 Install Playwright's Chromium browser once with `npx playwright install chromium`, then run component tests with `npm run test:components`. Component stories live beside their source components as `*.story.tsx` files and are served by the gallery at `/playwright/gallery/index.html`.
 
 Run `npm test` (or `npm run coverage --workspace=@seasonal-veggies/fe`) to run the Vitest unit tests and both Playwright projects and generate a combined LCOV report at `apps/seasonal-veggies-fe/coverage/lcov.info`.
+
+Run the backend API and OpenAPI integration tests with `npm run test:be`.
+
+The FE crop types are generated from the backend OpenAPI schema. After changing backend API contracts, run `npm run generate:api` from the repository root to regenerate `apps/seasonal-veggies-be/openapi.json` and `apps/seasonal-veggies-fe/src/api/types.gen.ts`.

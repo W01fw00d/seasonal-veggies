@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:api": "openapi-ts -i ../seasonal-veggies-be/openapi.json -o src/api -p @hey-api/typescript",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
@@ -42,6 +43,7 @@
     "istanbul-lib-report": "^3.0.1",
     "istanbul-reports": "^3.2.0",
     "oxlint": "^1.81.0",
+    "@hey-api/openapi-ts": "^0.99.0",
     "typescript": "~6.0.2",
     "v8-to-istanbul": "^9.3.0",
     "vite": "^8.3.0",

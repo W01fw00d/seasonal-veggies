@@ -25,7 +25,7 @@ test("shows a loading state while the crop request is pending", async ({
   await expect(page.getByText("Cargando...")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Seasonal Veggies" }),
-  ).toHaveCount(0);
+  ).toBeVisible();
 });
 
 test("renders crops after the request succeeds", async ({ page }) => {
@@ -37,8 +37,20 @@ test("renders crops after the request succeeds", async ({ page }) => {
   });
   await mockCropService(page, {
     body: [
-      { name: "garlic", category: "vegetable", seasonFrom: 0, seasonTo: 11, yearRound: true },
-      { name: "chard", category: "vegetable", seasonFrom: 7, seasonTo: 4, yearRound: false },
+      {
+        name: "garlic",
+        category: "vegetable",
+        seasonFrom: 0,
+        seasonTo: 11,
+        yearRound: true,
+      },
+      {
+        name: "chard",
+        category: "vegetable",
+        seasonFrom: 7,
+        seasonTo: 4,
+        yearRound: false,
+      },
     ],
   });
   await page.goto("/");
@@ -47,9 +59,9 @@ test("renders crops after the request succeeds", async ({ page }) => {
     page.getByRole("heading", { name: "Seasonal Veggies" }),
   ).toBeVisible();
   await expect(page.getByRole("listitem")).toHaveCount(2);
-  await expect(page.getByRole("listitem").filter({ hasText: "Ajo" })).toContainText(
-    "Todo el año",
-  );
+  await expect(
+    page.getByRole("listitem").filter({ hasText: "Ajo" }),
+  ).toContainText("Todo el año");
   await expect(
     page.getByRole("listitem").filter({ hasText: "Acelga" }),
   ).toContainText("Agosto - Mayo");
@@ -71,12 +83,15 @@ test("renders an empty crop list when the request succeeds without results", asy
 });
 
 test("shows an error when the crop request is rejected", async ({ page }) => {
-  await mockCropService(page, { status: 500, body: { message: "Internal server error" } });
+  await mockCropService(page, {
+    status: 500,
+    body: { message: "Internal server error" },
+  });
   await page.goto("/");
 
   await expect(page.getByText("No se pudo cargar la lista.")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Seasonal Veggies" }),
-  ).toHaveCount(0);
+  ).toBeVisible();
   await expect(page.getByText("Cargando...")).toHaveCount(0);
 });

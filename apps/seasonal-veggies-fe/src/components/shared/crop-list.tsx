@@ -9,7 +9,8 @@ import {
 import type { Crop } from "../../types";
 
 import { CROPS_LABELS } from "../../labels.ts";
-import { getMonthLabel, capitalize } from "../../helpers.ts";
+import { getMonthLabel } from "@/lib/dateUtils";
+import { capitalize } from "@/lib/stringUtils";
 
 const LABELS = {
   yearRound: "Todo el año",

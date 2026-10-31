@@ -25,9 +25,16 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: "npm run dev",
-    url: "http://localhost:5173/playwright/gallery/index.html",
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: "npm run start:dev --workspace=@seasonal-veggies/be",
+      url: "http://localhost:3000/api/health",
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: "npm run dev",
+      url: "http://localhost:5173/playwright/gallery/index.html",
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 });

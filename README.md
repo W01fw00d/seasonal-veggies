@@ -70,3 +70,8 @@ The FE crop types are generated from the backend OpenAPI schema.
 After changing backend API contracts, run `npm run generate:api`
 from the repository root to regenerate `apps/seasonal-veggies-be/openapi.json`
 and `apps/seasonal-veggies-fe/src/api/types.gen.ts`.
+
+Run `npm run contract:check` to verify that both generated artifacts match their
+sources without modifying the working tree. Backend e2e tests validate crop
+responses against the live OpenAPI schema; `npm run test:contract:fe` runs a
+Playwright smoke test against the real backend through Vite's API proxy.

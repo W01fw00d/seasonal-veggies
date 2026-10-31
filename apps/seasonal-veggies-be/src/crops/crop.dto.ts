@@ -32,6 +32,6 @@ export class CropDto {
   })
   seasonTo!: Month;
 
-  @ApiPropertyOptional({ type: Boolean, default: false, example: false })
-  yearRound?: boolean = false;
+  @ApiPropertyOptional({ type: Boolean, example: false })
+  yearRound?: boolean;
 }

@@ -12,12 +12,14 @@
     "build:be": "npm run build --workspace=@seasonal-veggies/be",
     "build": "npm run build:fe && npm run build:be",
     "generate:api": "npm run generate:openapi --workspace=@seasonal-veggies/be && npm run generate:api --workspace=@seasonal-veggies/fe",
+    "contract:check": "npm run generate:openapi --workspace=@seasonal-veggies/be -- --check && npm run check:api --workspace=@seasonal-veggies/fe",
     "lint": "npm run lint --workspace=@seasonal-veggies/fe && npm run lint --workspace=@seasonal-veggies/be",
     "test": "npm run test --workspace=@seasonal-veggies/be --workspace=@seasonal-veggies/fe",
     "test:be": "npm run test --workspace=@seasonal-veggies/be",
     "test:fe": "npm run coverage --workspace=@seasonal-veggies/fe",
     "test:unit": "npm run test:unit --workspace=@seasonal-veggies/fe",
     "test:components": "npm run test:components --workspace=@seasonal-veggies/fe",
-    "test:e2e": "npm run test:e2e --workspace=@seasonal-veggies/fe"
+    "test:e2e": "npm run test:e2e --workspace=@seasonal-veggies/fe",
+    "test:contract:fe": "npm run test:contract --workspace=@seasonal-veggies/fe"
   }
 }

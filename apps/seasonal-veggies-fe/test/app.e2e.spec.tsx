@@ -29,6 +29,12 @@ test("shows a loading state while the crop request is pending", async ({
 });
 
 test("renders crops after the request succeeds", async ({ page }) => {
+  let cropRequestCount = 0;
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname === "/api/crops") {
+      cropRequestCount += 1;
+    }
+  });
   await mockCropService(page, {
     body: [
       { name: "garlic", category: "vegetable", seasonFrom: 0, seasonTo: 11, yearRound: true },
@@ -48,6 +54,7 @@ test("renders crops after the request succeeds", async ({ page }) => {
     page.getByRole("listitem").filter({ hasText: "Acelga" }),
   ).toContainText("Agosto - Mayo");
   await expect(page.getByText("Cargando...")).toHaveCount(0);
+  expect(cropRequestCount).toBe(1);
 });
 
 test("renders an empty crop list when the request succeeds without results", async ({

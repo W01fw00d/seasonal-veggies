@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
-
 import { PageContainer } from "@/components/shared/page-container";
 import { CropList } from "@/components/shared/crop-list";
 
-import { getAllCrops } from "./services/cropService.ts";
-
-import type { Crop } from "./types.ts";
+import { useCrops } from "./hooks/useCrops";
 
 const LABELS = {
   loading: "Cargando",
@@ -13,32 +9,11 @@ const LABELS = {
 };
 
 function App() {
-  const [crops, setCrops] = useState<Crop[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    getAllCrops()
-      .then((data) => {
-        if (!cancelled) setCrops(data);
-      })
-      .catch(() => {
-        if (!cancelled) setError(LABELS.loadingError);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const cropsQuery = useCrops();
 
   // TODO: display loading and error labels instead of CropList, maintaining always the page layout and the Season Veggies title
-  if (loading) return <p>{LABELS.loading}...</p>;
-  if (error) return <p>{error}</p>;
+  if (cropsQuery.isPending) return <p>{LABELS.loading}...</p>;
+  if (cropsQuery.isError) return <p>{LABELS.loadingError}</p>;
 
   return (
     <PageContainer>
@@ -46,7 +21,7 @@ function App() {
         <h1 className="text-3xl font-bold underline">Seasonal Veggies</h1>
       </div>
 
-      <CropList crops={crops} />
+      <CropList crops={cropsQuery.data} />
     </PageContainer>
   );
 }

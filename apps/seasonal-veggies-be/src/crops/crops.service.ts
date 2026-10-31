@@ -5,6 +5,9 @@ import type { CropDto } from "./crop.dto";
 @Injectable()
 export class CropsService {
   getAll(): CropDto[] {
-    return crops;
+    return crops.map((crop) => ({
+      ...crop,
+      yearRound: crop.yearRound ?? false,
+    }));
   }
 }

@@ -40,6 +40,11 @@ describe("Crops API (e2e)", () => {
         yearRound: true,
       },
     );
+    assert.equal(
+      response.body.find((crop: { name: string }) => crop.name === "chard")
+        ?.yearRound,
+      false,
+    );
     for (const crop of response.body) {
       assert.deepEqual(Object.keys(crop).sort(), [
         "category",
@@ -86,6 +91,8 @@ describe("Crops API (e2e)", () => {
       cropSchema.properties.seasonFrom.enum,
       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     );
+    assert.ok(!cropSchema.required.includes("yearRound"));
+    assert.equal(cropSchema.properties.yearRound.default, false);
     assert.deepEqual(
       {
         type: cropSchema.properties.seasonFrom.type,

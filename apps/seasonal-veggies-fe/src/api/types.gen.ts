@@ -9,7 +9,7 @@ export type CropDto = {
     category: 'vegetable' | 'fruit';
     seasonFrom: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
     seasonTo: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-    yearRound: boolean;
+    yearRound?: boolean;
 };
 
 export type CropsControllerGetAllData = {

@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const; // 0-indexed as Js Date#getMonth()
 export type Month = (typeof MONTHS)[number];
@@ -32,6 +32,6 @@ export class CropDto {
   })
   seasonTo!: Month;
 
-  @ApiProperty({ type: Boolean, example: false })
-  yearRound!: boolean;
+  @ApiPropertyOptional({ type: Boolean, default: false, example: false })
+  yearRound?: boolean = false;
 }

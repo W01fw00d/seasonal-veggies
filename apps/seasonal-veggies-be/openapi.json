@@ -113,6 +113,7 @@
           },
           "yearRound": {
             "type": "boolean",
+            "default": false,
             "example": false
           }
         },
@@ -120,8 +121,7 @@
           "name",
           "category",
           "seasonFrom",
-          "seasonTo",
-          "yearRound"
+          "seasonTo"
         ]
       }
     }

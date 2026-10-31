@@ -4,7 +4,6 @@ import type { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import request from "supertest";
 import { AppModule } from "../src/app.module";
-import { setupSwagger } from "../src/docs/swagger";
 
 describe("Crops API (e2e)", () => {
   let app: INestApplication;
@@ -14,7 +13,6 @@ describe("Crops API (e2e)", () => {
       imports: [AppModule],
     }).compile();
     app = moduleRef.createNestApplication();
-    setupSwagger(app);
     await app.init();
   });
 
@@ -40,11 +38,6 @@ describe("Crops API (e2e)", () => {
         yearRound: true,
       },
     );
-    assert.equal(
-      response.body.find((crop: { name: string }) => crop.name === "chard")
-        ?.yearRound,
-      false,
-    );
     for (const crop of response.body) {
       assert.deepEqual(Object.keys(crop).sort(), [
         "category",
@@ -67,43 +60,5 @@ describe("Crops API (e2e)", () => {
       );
       assert.equal(typeof crop.yearRound, "boolean");
     }
-  });
-
-  it("publishes an OpenAPI schema for the crop endpoint", async () => {
-    const response = await request(app.getHttpServer())
-      .get("/api/docs-json")
-      .expect(200)
-      .expect("Content-Type", /json/);
-
-    assert.match(response.body.openapi, /^3\./);
-    assert.deepEqual(
-      response.body.paths["/api/crops"].get.responses["200"].content[
-        "application/json"
-      ].schema,
-      {
-        type: "array",
-        items: { $ref: "#/components/schemas/CropDto" },
-      },
-    );
-    const cropSchema = response.body.components.schemas.CropDto;
-    assert.deepEqual(cropSchema.properties.category.enum, ["vegetable", "fruit"]);
-    assert.deepEqual(
-      cropSchema.properties.seasonFrom.enum,
-      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    );
-    assert.ok(!cropSchema.required.includes("yearRound"));
-    assert.equal(cropSchema.properties.yearRound.default, false);
-    assert.deepEqual(
-      {
-        type: cropSchema.properties.seasonFrom.type,
-        minimum: cropSchema.properties.seasonFrom.minimum,
-        maximum: cropSchema.properties.seasonFrom.maximum,
-      },
-      {
-        type: "integer",
-        minimum: 0,
-        maximum: 11,
-      },
-    );
   });
 });

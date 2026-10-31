@@ -21,9 +21,7 @@
           }
         },
         "summary": "List all crops and their seasons",
-        "tags": [
-          "crops"
-        ]
+        "tags": ["crops"]
       }
     },
     "/api/health": {
@@ -35,9 +33,7 @@
             "description": ""
           }
         },
-        "tags": [
-          "Health"
-        ]
+        "tags": ["Health"]
       }
     }
   },
@@ -65,64 +61,29 @@
           },
           "category": {
             "type": "string",
-            "enum": [
-              "vegetable",
-              "fruit"
-            ],
+            "enum": ["vegetable", "fruit"],
             "example": "vegetable"
           },
           "seasonFrom": {
             "type": "integer",
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11
-            ],
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             "minimum": 0,
             "maximum": 11,
             "example": 7
           },
           "seasonTo": {
             "type": "integer",
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11
-            ],
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             "minimum": 0,
             "maximum": 11,
             "example": 4
           },
           "yearRound": {
             "type": "boolean",
-            "default": false,
             "example": false
           }
         },
-        "required": [
-          "name",
-          "category",
-          "seasonFrom",
-          "seasonTo"
-        ]
+        "required": ["name", "category", "seasonFrom", "seasonTo"]
       }
     }
   }

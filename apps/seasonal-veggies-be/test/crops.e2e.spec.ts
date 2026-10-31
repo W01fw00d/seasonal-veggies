@@ -6,7 +6,7 @@ import request from "supertest";
 import { AppModule } from "../src/app.module";
 import { setupSwagger } from "../src/docs/swagger";
 
-describe("Crops API", () => {
+describe("Crops API (e2e)", () => {
   let app: INestApplication;
 
   before(async () => {

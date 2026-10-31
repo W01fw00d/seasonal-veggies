@@ -42,11 +42,14 @@ test("renders crop labels and their seasons", async ({ mount }) => {
   await expect(items.filter({ hasText: "Cultivo desconocido" })).toHaveCount(1);
 });
 
-test("renders an empty list when there are no crops", async ({ mount }) => {
+test("shows a message when there are no crops", async ({ mount }) => {
   const component = await mount<typeof Default>(
     "components/shared/crop-list/Default",
     { crops: [] },
   );
 
   await expect(component.getByRole("listitem")).toHaveCount(0);
+  await expect(
+    component.getByText("No se han encontrado resultados"),
+  ).toBeVisible();
 });

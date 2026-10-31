@@ -29,8 +29,7 @@ The frontend runs at `http://localhost:5173`; the backend listens on `http://loc
 ```sh
 npm run build
 npm run lint
-npm test:be
-npm test:fe
+npm test
 ```
 
 ## Build and run Docker images independently

@@ -1,0 +1,129 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/crops": {
+      "get": {
+        "operationId": "CropsController_getAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The crop list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CropDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "List all crops and their seasons",
+        "tags": [
+          "crops"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "HealthController_getHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Seasonal Veggies API",
+    "description": "API for seasonal crop data",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "crops",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CropDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "chard"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "vegetable",
+              "fruit"
+            ],
+            "example": "vegetable"
+          },
+          "seasonFrom": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "minimum": 0,
+            "maximum": 11,
+            "example": 7
+          },
+          "seasonTo": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "minimum": 0,
+            "maximum": 11,
+            "example": 4
+          },
+          "yearRound": {
+            "type": "boolean",
+            "default": false,
+            "example": false
+          }
+        },
+        "required": [
+          "name",
+          "category",
+          "seasonFrom",
+          "seasonTo"
+        ]
+      }
+    }
+  }
+}

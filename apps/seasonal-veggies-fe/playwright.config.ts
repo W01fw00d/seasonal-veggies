@@ -16,7 +16,8 @@ export default defineConfig({
     },
     {
       name: "e2e",
-      testMatch: "**/app.e2e.spec.tsx",
+      testDir: "./test",
+      testMatch: "**/*.e2e.spec.tsx",
       use: {
         ...devices["Desktop Chrome"],
         baseURL: "http://localhost:5173",

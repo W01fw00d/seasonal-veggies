@@ -2,20 +2,24 @@ import { expect, test } from "../playwright/coverage-fixtures";
 
 async function mockCropService(
   page: import("@playwright/test").Page,
-  implementation: string,
+  response: { status?: number; body?: unknown; delay?: number },
 ) {
-  await page.route("**/src/services/cropService.ts*", (route) =>
-    route.fulfill({
-      contentType: "text/javascript",
-      body: `export async function getAllCrops() { ${implementation} }`,
-    }),
-  );
+  await page.route("**/api/crops", async (route) => {
+    if (response.delay) {
+      await new Promise((resolve) => setTimeout(resolve, response.delay));
+    }
+    await route.fulfill({
+      status: response.status ?? 200,
+      contentType: "application/json",
+      body: JSON.stringify(response.body ?? []),
+    });
+  });
 }
 
 test("shows a loading state while the crop request is pending", async ({
   page,
 }) => {
-  await mockCropService(page, "return new Promise(() => {});");
+  await mockCropService(page, { delay: 60_000 });
   await page.goto("/");
 
   await expect(page.getByText("Cargando...")).toBeVisible();
@@ -25,13 +29,12 @@ test("shows a loading state while the crop request is pending", async ({
 });
 
 test("renders crops after the request succeeds", async ({ page }) => {
-  await mockCropService(
-    page,
-    `return [
+  await mockCropService(page, {
+    body: [
       { name: "garlic", category: "vegetable", seasonFrom: 0, seasonTo: 11, yearRound: true },
-      { name: "chard", category: "vegetable", seasonFrom: 7, seasonTo: 4, yearRound: false }
-    ];`,
-  );
+      { name: "chard", category: "vegetable", seasonFrom: 7, seasonTo: 4, yearRound: false },
+    ],
+  });
   await page.goto("/");
 
   await expect(
@@ -50,7 +53,7 @@ test("renders crops after the request succeeds", async ({ page }) => {
 test("renders an empty crop list when the request succeeds without results", async ({
   page,
 }) => {
-  await mockCropService(page, "return [];");
+  await mockCropService(page, { body: [] });
   await page.goto("/");
 
   await expect(
@@ -61,7 +64,7 @@ test("renders an empty crop list when the request succeeds without results", asy
 });
 
 test("shows an error when the crop request is rejected", async ({ page }) => {
-  await mockCropService(page, 'throw new Error("Crop request failed");');
+  await mockCropService(page, { status: 500, body: { message: "Internal server error" } });
   await page.goto("/");
 
   await expect(page.getByText("No se pudo cargar la lista.")).toBeVisible();

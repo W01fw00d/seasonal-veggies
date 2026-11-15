@@ -29,6 +29,7 @@ playwright/.cache/
 
 # Agents
 .claude/*
+.agents/*
 
 # Miscellaneous
 notes.txt
